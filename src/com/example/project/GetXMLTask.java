@@ -44,7 +44,6 @@ public class GetXMLTask extends AsyncTask<String, String, String>
 					   sb.append(line + System.getProperty("line.separator"));
 				   }  
 				result = sb.toString();	
-//				mXml = result;
 			} catch (ClientProtocolException e) {
 
 				e.printStackTrace();
@@ -59,16 +58,10 @@ public class GetXMLTask extends AsyncTask<String, String, String>
 	@Override 
 	protected void onPreExecute()
 	{
-//		progressDialog.setMessage("Список загружается...");
-//	    progressDialog.show();
-//	    progressDialog.setCanceledOnTouchOutside(true);	
 	}
 	
 	@Override
 	protected void onPostExecute(String result) {
-//		parseXML();
-//		progressDialog.dismiss();
-//		MainActivity.getResult();
 		callback.onTaskCompleted(result);
 		super.onPostExecute(result);
 		

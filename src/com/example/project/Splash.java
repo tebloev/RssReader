@@ -28,7 +28,7 @@ public class Splash extends Activity implements OnTaskCompleted {
 	            public void run() {
 	                 
 	                try {	                	
-	                    sleep(5*1000);
+	                    sleep(3*1000);
 	                    Intent i = new Intent(getBaseContext(), MainActivity.class);
 	                    startActivity(i);
 	                    finish();	                     

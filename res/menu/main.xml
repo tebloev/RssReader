@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:sabd="http://schemas.android.com/apk/res-auto">
+    
+        <item
+        android:id="@+id/dev_info"
+        android:title="DevInfo"
+        android:icon="@android:drawable/ic_dialog_info"        
+        sabd:showAsAction="always" />    
+
+</menu>

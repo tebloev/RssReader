@@ -1,49 +1,47 @@
 package com.example.project;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class MainActivity extends Activity implements OnTaskCompleted{
+public class MainActivity extends ActionBarActivity implements OnTaskCompleted{
 	
 	String mXml;
 	XmlPullParser xpp;
 	ListView mListView;
 	static GetXMLTask mTask;
 	static boolean onCompleteTask = false;
+	ActionBar ab;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		getResult();
+		abInit();
 		final SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh);
 		mSwipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
 			
@@ -57,6 +55,33 @@ public class MainActivity extends Activity implements OnTaskCompleted{
 		startService(new Intent(this, CheckService.class));
 	}
 	
+	
+	private void abInit()
+	{
+		ab = getSupportActionBar();
+        ab.setDisplayShowTitleEnabled(false);
+
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+		
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+	    switch (item.getItemId()) {
+	    case R.id.dev_info:
+	    	Intent mIntent = new Intent(MainActivity.this, DevInfo.class);
+	    	startActivity(mIntent);
+	      break;
+	    }
+	    return true;
+	}
 
     @Override
     public void onTaskCompleted(String result) {
